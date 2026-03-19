@@ -1,128 +1,88 @@
 /* ============================================================
-   GAN HASIPURIM — BUBBLE INTERACTION SYSTEM
+   GAN HASIPURIM — Bubble Interaction System
    ============================================================ */
-
 (function () {
   'use strict';
 
-  const overlay   = document.getElementById('bubbleOverlay');
-  const card      = document.getElementById('bubbleCard');
-  const closeBtn  = document.getElementById('bubbleClose');
-  const content   = document.getElementById('bubbleContent');
+  const overlay  = document.getElementById('bubbleOverlay');
+  const card     = document.getElementById('bubbleCard');
+  const closeBtn = document.getElementById('bubbleClose');
+  const content  = document.getElementById('bubbleContent');
 
   let lastFocused = null;
+  let qrGenerated = false;
 
-  /* ── Open bubble ── */
-  function openBubble(templateId, triggerEl) {
-    const tpl = document.getElementById('bubble-' + templateId);
+  /* ── Open ── */
+  function openBubble(id, trigger) {
+    const tpl = document.getElementById('bubble-' + id);
     if (!tpl) return;
 
-    // Populate
     content.innerHTML = '';
     content.appendChild(tpl.content.cloneNode(true));
 
-    // Generate QR code if this is the contact bubble
-    if (templateId === 'contact') {
+    if (id === 'contact' && !qrGenerated) {
       generateQR();
     }
 
-    // Show overlay
-    lastFocused = triggerEl;
+    lastFocused = trigger;
     overlay.hidden = false;
-
-    // Force reflow then animate in
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        overlay.classList.add('is-visible');
-      });
-    });
-
-    // Focus close button for accessibility
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      overlay.classList.add('is-visible');
+    }));
     closeBtn.focus();
-
-    // Trap focus inside bubble
     overlay.addEventListener('keydown', trapFocus);
   }
 
-  /* ── Close bubble ── */
+  /* ── Close ── */
   function closeBubble() {
     overlay.classList.remove('is-visible');
-
-    // Wait for animation to finish before hiding
-    card.addEventListener('transitionend', function handler() {
+    card.addEventListener('transitionend', function h() {
       overlay.hidden = true;
-      card.removeEventListener('transitionend', handler);
+      card.removeEventListener('transitionend', h);
       if (lastFocused) lastFocused.focus();
     }, { once: true });
-
     overlay.removeEventListener('keydown', trapFocus);
   }
 
-  /* ── Trap focus inside bubble ── */
+  /* ── Focus trap ── */
   function trapFocus(e) {
-    if (e.key === 'Escape') {
-      closeBubble();
-      return;
-    }
-
+    if (e.key === 'Escape') { closeBubble(); return; }
     if (e.key !== 'Tab') return;
-
-    const focusable = overlay.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-    const first = focusable[0];
-    const last  = focusable[focusable.length - 1];
-
-    if (e.shiftKey) {
-      if (document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      }
-    } else {
-      if (document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
+    const els = [...overlay.querySelectorAll(
+      'button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])'
+    )];
+    if (!els.length) return;
+    if (e.shiftKey && document.activeElement === els[0]) {
+      e.preventDefault(); els[els.length - 1].focus();
+    } else if (!e.shiftKey && document.activeElement === els[els.length - 1]) {
+      e.preventDefault(); els[0].focus();
     }
   }
 
-  /* ── Generate QR code ── */
+  /* ── QR Code ── */
   function generateQR() {
-    const container = document.getElementById('qrcode');
-    if (!container) return;
-    container.innerHTML = '';
-
-    // Wait for QRCode library to be available
-    if (typeof QRCode === 'undefined') return;
-
-    new QRCode(container, {
+    const wrap = document.getElementById('qrcode');
+    if (!wrap || typeof QRCode === 'undefined') return;
+    wrap.innerHTML = '';
+    new QRCode(wrap, {
       text: 'https://wa.me/972547774120',
-      width: 120,
-      height: 120,
+      width: 110, height: 110,
       colorDark: '#0040A1',
       colorLight: '#ffffff',
       correctLevel: QRCode.CorrectLevel.M
     });
+    qrGenerated = true;
   }
 
-  /* ── Event Listeners ── */
-
-  // All expandable buttons
-  document.querySelectorAll('.expandable[data-bubble]').forEach(btn => {
+  /* ── Wire up all expand buttons ── */
+  document.querySelectorAll('.expand-btn[data-bubble]').forEach(btn => {
     btn.addEventListener('click', function () {
-      const id = this.dataset.bubble;
-      openBubble(id, this);
+      openBubble(this.dataset.bubble, this);
     });
   });
 
-  // Close button
+  /* ── Close triggers ── */
   closeBtn.addEventListener('click', closeBubble);
-
-  // Click outside bubble card closes it
-  overlay.addEventListener('click', function (e) {
-    if (e.target === overlay) {
-      closeBubble();
-    }
-  });
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeBubble(); });
 
 })();
