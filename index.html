@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>גן הסיפורים</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 3D Room Background -->
+  <div class="room" aria-hidden="true">
+    <div class="room__wall"></div>
+    <div class="room__floor"></div>
+  </div>
+
+  <!-- Bubble Overlay -->
+  <div class="bubble-overlay" id="bubbleOverlay" role="dialog" aria-modal="true" aria-labelledby="bubbleTitle" hidden>
+    <div class="bubble-card" id="bubbleCard">
+      <button class="bubble-close" id="bubbleClose" aria-label="סגור">&times;</button>
+      <div class="bubble-content" id="bubbleContent"></div>
+    </div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <!-- ─── HERO ─── -->
+    <header class="hero">
+      <h1 class="hero__title">גן הסיפורים</h1>
+      <p class="hero__subtitle">יוצאים לדרך במרום גליל</p>
+      <div class="hero__underline"></div>
+    </header>
+
+    <!-- ─── INTRO ─── -->
+    <section class="card intro-card">
+      <button class="expandable" data-bubble="intro">
+        <span class="expandable__label">שלום לכולן,</span>
+        <span class="expandable__hint">לחצו לפרטים</span>
+      </button>
+      <div class="intro-teaser">אנו נרגשים לפתוח את פיילוט "גן הסיפורים" — כלי דיגיטלי ייחודי לחוויה רגשית ויוצרת.</div>
+    </section>
+
+    <!-- Hidden bubble content: intro -->
+    <template id="bubble-intro">
+      <p><strong>שלום לכולן,</strong></p>
+      <p>
+        אנו נרגשים לפתוח את פיילוט "גן הסיפורים" בגגי המועצה האזורית מרום הגליל.
+        מדובר בכלי דיגיטלי ייחודי שנועד להפוך את המפגש עם עולם הסיפור לחוויה רגשית,
+        יוצרת ומחזקת – <strong>בכל זמן ומכל מכשיר.</strong>
+      </p>
+    </template>
+
+    <!-- ─── QUOTE ─── -->
+    <section class="card quote-card">
+      <button class="expandable expandable--quote" data-bubble="quote">
+        <span class="expandable__label">תודה מיוחדת ✨</span>
+        <span class="expandable__hint">לחצו לקרוא</span>
+      </button>
+    </section>
+
+    <!-- Hidden bubble content: quote -->
+    <template id="bubble-quote">
+      <p>
+        תודה גדולה לבני סויסה, ראש אגף החינוך, ולתומר בניטה, ראשת מחלקת קדם יסודי,
+        על ההובלה והמחוייבות לקידום ילדי המועצה במיוחד בימים מאתגרים אלה.
+      </p>
+    </template>
+
+    <!-- ─── WHAT IS IT ─── -->
+    <section class="card about-card">
+      <button class="expandable section-title-btn" data-bubble="about">
+        <h2 class="section-title">מהו "גן הסיפורים"?</h2>
+        <span class="expandable__hint">לחצו לפרטים</span>
+      </button>
+      <div class="section-divider"></div>
+      <p class="about-teaser">
+        זהו מרחב דיגיטלי המאפשר עבודה עם ילדים דרך סיפורים מוכנים או יצירה עצמאית.
+        הכלי נשען על מודל גש"ר מאח"ד של פרופ' מולי להד, ומסייע בביטוי רגשי ובניית חוסן דרך משחק ויצירה.
+      </p>
+    </section>
+
+    <!-- Hidden bubble content: about -->
+    <template id="bubble-about">
+      <h3>מהו "גן הסיפורים"?</h3>
+      <p>
+        זהו מרחב דיגיטלי המאפשר עבודה עם ילדים דרך סיפורים מוכנים או יצירה עצמאית.
+        הכלי נשען על מודל גש"ר מאח"ד של פרופ' מולי להד, ומסייע בביטוי רגשי ובניית חוסן דרך משחק ויצירה.
+      </p>
+      <p class="attribution">
+        המוצר פותח בשיתוף פעולה של עמותת משאבים ו-Nick Academy, ומופעל על ידי Nick Academy.
+      </p>
+    </template>
+
+    <!-- ─── FEATURE CARDS ─── -->
+    <div class="features-grid">
+
+      <!-- Feature: What it enables -->
+      <section class="card feature-card">
+        <button class="expandable section-title-btn" data-bubble="features-enables">
+          <h2 class="section-title">📚 מה הכלי מאפשר</h2>
+          <span class="expandable__hint">לחצו לפרטים</span>
+        </button>
+        <ul class="feature-preview">
+          <li>ספריית סיפורים</li>
+          <li>יצירה משותפת</li>
+        </ul>
+      </section>
+
+      <!-- Feature: Future outlook -->
+      <section class="card feature-card">
+        <button class="expandable section-title-btn" data-bubble="features-future">
+          <h2 class="section-title">🧭 מבט לעתיד</h2>
+          <span class="expandable__hint">לחצו לפרטים</span>
+        </button>
+        <ul class="feature-preview">
+          <li>מיפוי כוחות</li>
+          <li>מנוע הנחיה</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- Hidden bubble content: features-enables -->
+    <template id="bubble-features-enables">
+      <h3>📚 מה הכלי מאפשר</h3>
+      <ul>
+        <li><strong>ספריית סיפורים:</strong> סיפורים סביב סיטואציות יומיומיות.</li>
+        <li><strong>יצירה משותפת:</strong> תהליך מודרך ליצירת ספר מאויר.</li>
+      </ul>
+    </template>
+
+    <!-- Hidden bubble content: features-future -->
+    <template id="bubble-features-future">
+      <h3>🧭 מבט לעתיד</h3>
+      <ul>
+        <li><strong>מיפוי כוחות:</strong> כלי אבחון לזיהוי משאבי חוסן.</li>
+        <li><strong>מנוע הנחיה:</strong> בניית פעילויות משלימות סביב הסיפור.</li>
+      </ul>
+    </template>
+
+    <!-- ─── PILOT INFO ─── -->
+    <section class="card pilot-card">
+      <button class="expandable section-title-btn" data-bubble="pilot">
+        <h2 class="section-title">✅ מידע חשוב לפילוט</h2>
+        <span class="expandable__hint">לחצו לפרטים</span>
+      </button>
+      <p class="pilot-teaser">מכסות, שלבי פיתוח, ואחריות תוכן — לחצו לפרטים</p>
+    </section>
+
+    <!-- Hidden bubble content: pilot -->
+    <template id="bubble-pilot">
+      <h3>✅ מידע חשוב לפילוט</h3>
+      <ul>
+        <li><strong>מכסת יצירה:</strong> המערכת מוגבלת ליצירה של עד 10 סיפורים חדשים למשתמש/ת.</li>
+        <li><strong>פיילוט פעיל:</strong> הפלטפורמה בשלבי פיתוח (Pilot). אנו משפרים את הכלי על בסיס התנסותכן.</li>
+        <li><strong>אחריות תוכן:</strong> המערכת עושה שימוש ב-AI. באחריות המשתמש/ת לבדוק את התוצר לפני חשיפתו.</li>
+      </ul>
+    </template>
+
+    <!-- ─── CONTACT ─── -->
+    <section class="card contact-card">
+      <button class="expandable section-title-btn" data-bubble="contact">
+        <h2 class="section-title">😊 נשארים בקשר!</h2>
+        <span class="expandable__hint">לחצו לפרטים</span>
+      </button>
+      <p class="contact-teaser">WhatsApp: <strong>054-7774120</strong></p>
+    </section>
+
+    <!-- Hidden bubble content: contact -->
+    <template id="bubble-contact">
+      <h3>😊 נשארים בקשר!</h3>
+      <div class="contact-grid">
+        <div class="contact-col">
+          <p>לשאלות ופידבק, פנו אלינו בוואטסאפ:</p>
+          <a class="contact-phone" href="https://wa.me/972547774120" target="_blank" rel="noopener">054-7774120</a>
+        </div>
+        <div class="contact-col contact-col--qr">
+          <p>הצטרפו לקהילה שלנו:</p>
+          <p class="community-name">גן הסיפורים - מולי להד</p>
+          <div id="qrcode" class="qr-container"></div>
+        </div>
+      </div>
+    </template>
+
+    <!-- ─── FOOTER ─── -->
+    <footer class="site-footer">
+      <div class="footer-text">
+        <p>בברכה, צוות גן הסיפורים</p>
+        <p class="footer-meta">מספר גפ"ן: 41681</p>
+      </div>
+      <div class="footer-garfield">
+        <!-- Garfield SVG mascot -->
+        <svg class="garfield-svg" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" aria-label="גרפילד - שועל הסיפורים">
+          <!-- Body -->
+          <ellipse cx="100" cy="95" rx="65" ry="38" fill="#F4920A"/>
+          <!-- Belly -->
+          <ellipse cx="100" cy="98" rx="38" ry="25" fill="#F7C47A"/>
+          <!-- Head -->
+          <ellipse cx="100" cy="52" rx="42" ry="38" fill="#F4920A"/>
+          <!-- Ears -->
+          <polygon points="62,24 55,8 75,20" fill="#F4920A"/>
+          <polygon points="138,24 145,8 125,20" fill="#F4920A"/>
+          <polygon points="64,22 58,11 74,20" fill="#F0A0C0"/>
+          <polygon points="136,22 142,11 126,20" fill="#F0A0C0"/>
+          <!-- Eyes -->
+          <ellipse cx="84" cy="48" rx="10" ry="8" fill="#6DB33F"/>
+          <ellipse cx="116" cy="48" rx="10" ry="8" fill="#6DB33F"/>
+          <ellipse cx="85" cy="49" rx="5" ry="6" fill="#222"/>
+          <ellipse cx="117" cy="49" rx="5" ry="6" fill="#222"/>
+          <circle cx="87" cy="47" r="2" fill="#fff"/>
+          <circle cx="119" cy="47" r="2" fill="#fff"/>
+          <!-- Nose -->
+          <ellipse cx="100" cy="60" rx="5" ry="3" fill="#E05080"/>
+          <!-- Mouth -->
+          <path d="M94,63 Q100,70 106,63" stroke="#555" stroke-width="1.5" fill="none"/>
+          <!-- Whiskers -->
+          <line x1="105" y1="60" x2="135" y2="56" stroke="#555" stroke-width="1"/>
+          <line x1="105" y1="62" x2="135" y2="62" stroke="#555" stroke-width="1"/>
+          <line x1="95" y1="60" x2="65" y2="56" stroke="#555" stroke-width="1"/>
+          <line x1="95" y1="62" x2="65" y2="62" stroke="#555" stroke-width="1"/>
+          <!-- Stripes on head -->
+          <path d="M80,20 Q82,30 80,36" stroke="#D07000" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M100,17 Q100,28 100,34" stroke="#D07000" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M120,20 Q118,30 120,36" stroke="#D07000" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <!-- Tail -->
+          <path d="M160,90 Q185,70 180,100 Q175,120 160,115" stroke="#F4920A" stroke-width="10" fill="none" stroke-linecap="round"/>
+          <!-- Left arm/paw writing -->
+          <ellipse cx="52" cy="110" rx="18" ry="10" fill="#F4920A" transform="rotate(-20,52,110)"/>
+          <ellipse cx="40" cy="120" rx="14" ry="8" fill="#F7C47A" transform="rotate(-10,40,120)"/>
+          <!-- Pencil -->
+          <rect x="18" y="112" width="4" height="20" rx="1" fill="#FFD700" transform="rotate(-30,20,122)"/>
+          <polygon points="18,130 22,130 20,137" fill="#FF6B6B" transform="rotate(-30,20,122)"/>
+          <!-- Book/paper lines -->
+          <rect x="30" y="125" width="35" height="10" rx="2" fill="#fff" opacity="0.7"/>
+          <line x1="33" y1="129" x2="62" y2="129" stroke="#aaa" stroke-width="0.8"/>
+          <line x1="33" y1="132" x2="55" y2="132" stroke="#aaa" stroke-width="0.8"/>
+        </svg>
+      </div>
+    </footer>
+
+  </div><!-- /.page-wrapper -->
+
+  <!-- QR Code library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
